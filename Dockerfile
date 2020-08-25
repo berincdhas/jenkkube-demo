@@ -10,7 +10,10 @@ COPY . /app
 WORKDIR /app
 
 # We don't need to install Composer as it's already installed in the base image (phpdockerio/php74-cli)
-
+RUN curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
+  && tar xzvf docker-17.04.0-ce.tgz \
+  && mv docker/docker /usr/local/bin \
+  && rm -r docker docker-17.04.0-ce.tgz
 # We will now install our composer dependencies:
 RUN cd /app && composer install --no-progress
 
